@@ -1,0 +1,16 @@
+<form>
+  <fieldset>
+    <label for="name">Project name:</label>
+    <input type="text"
+           name="name"
+           [(ngModel)]="project.name"
+           placeholder="Enter project name">
+  </fieldset>
+  <input value="Save"
+         type="submit"
+         (click)="saveProject()"
+         class="primary" />
+  <button routerLink="/projects"
+          class="secondary">Cancel</button>
+</form>
+<pre>{{ project | json }}</pre>
