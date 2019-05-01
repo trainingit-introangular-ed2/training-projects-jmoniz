@@ -1,10 +1,9 @@
 <h3>Projects list</h3>
 <hr>
+<app-filter-projects-form (FilterProjects)="OnFilterProjects($event)"></app-filter-projects-form>
 <div>
   <button routerLink="new"
           class="primary">New Project</button>
 </div>
-<hr>
-<app-filter-projects-form (FilterProjects)="OnFilterProjects($event)"></app-filter-projects-form>
 <hr>
 <app-projects-list [projects]="projects"></app-projects-list>

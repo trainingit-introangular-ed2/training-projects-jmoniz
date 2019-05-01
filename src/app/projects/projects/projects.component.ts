@@ -25,6 +25,6 @@ export class ProjectsComponent implements OnInit {
   }
 
   private getProjects() {
-    this.projectService.getAll().subscribe(r => (this.projects = r));
+    this.projectService.getProjects().subscribe(r => (this.projects = r));
   }
 }

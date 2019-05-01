@@ -1,5 +1,4 @@
-<div *ngIf="projects.length > 0; else noProjects;"
-     class="row">
+<div class="row" *ngIf="projects.length > 0; else noProjects;">
   <div *ngFor="let item of projects"
        class="card">
     <h5><a routerLink="view/{{item.id}}"> {{ item.name }}</a></h5>
@@ -10,4 +9,3 @@
     <h5>There are no projects</h5>
   </div>
 </ng-template>
-

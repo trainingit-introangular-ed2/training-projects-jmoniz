@@ -9,7 +9,7 @@ import { Project } from '../models/project.model';
 export class ProjectService {
   constructor() {}
 
-  public getAll(): Observable<Project[]> {
+  public getProjects(): Observable<Project[]> {
     return of(PROJECTS);
   }
 
@@ -19,5 +19,9 @@ export class ProjectService {
 
   public filter(searchText: string): Observable<Project[]> {
     return of(PROJECTS.filter(project => project.name.toLocaleUpperCase().includes(searchText.toLocaleUpperCase())));
+  }
+
+  public getProject(id: number): Observable<Project> {
+    return of(PROJECTS.find(project => project.id === id));
   }
 }
