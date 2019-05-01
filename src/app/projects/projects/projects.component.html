@@ -4,15 +4,7 @@
   <button routerLink="new"
           class="primary">New Project</button>
 </div>
-<div *ngIf="projects.length > 0; else noProjects;"
-     class="row">
-  <div *ngFor="let item of projects"
-       class="card">
-    <h5><a routerLink="view/{{item.id}}"> {{ item.name }}</a></h5>
-  </div>
-</div>
-<ng-template #noProjects>
-  <div class="row">
-    <h5>There are no projects</h5>
-  </div>
-</ng-template>
+<hr>
+<app-filter-projects-form (FilterProjects)="OnFilterProjects($event)"></app-filter-projects-form>
+<hr>
+<app-projects-list [projects]="projects"></app-projects-list>

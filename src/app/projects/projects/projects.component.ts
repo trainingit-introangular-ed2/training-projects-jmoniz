@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { environment } from '../../../environments/environment';
 import { Project } from '../models/project.model';
+import { ProjectService } from '../services/project.service';
 
 @Component({
   selector: 'app-projects',
@@ -10,9 +10,21 @@ import { Project } from '../models/project.model';
 export class ProjectsComponent implements OnInit {
   public projects: Project[];
 
-  constructor() {}
+  constructor(private projectService: ProjectService) {}
 
   ngOnInit() {
-    this.projects = environment.projects;
+    this.getProjects();
+  }
+
+  public OnFilterProjects(searchText: string) {
+    if (searchText.trim().length > 0) {
+      this.projectService.filter(searchText).subscribe(r => (this.projects = r));
+    } else {
+      this.getProjects();
+    }
+  }
+
+  private getProjects() {
+    this.projectService.getAll().subscribe(r => (this.projects = r));
   }
 }

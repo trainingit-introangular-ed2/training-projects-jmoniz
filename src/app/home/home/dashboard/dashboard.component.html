@@ -1,0 +1,9 @@
+<section *ngIf="projectCount == 0;">
+  <h3>There are no Projects</h3>
+</section>
+<section *ngIf="projectCount == 1">
+  <h3>You have one project</h3>
+</section>
+<section *ngIf="projectCount > 1">
+  <h3>You have {{ projectCount }} projects</h3>
+</section>

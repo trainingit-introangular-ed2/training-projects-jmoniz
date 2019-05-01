@@ -1,0 +1,12 @@
+  <div>
+    <section>
+      <fieldset>
+        <label for="name">Search:</label>
+        <input name="name"
+               type="text"
+               [(ngModel)]="textToSearch"
+               placeholder="Type a project name"
+               (keyup)="FilterProjects.emit(textToSearch)" />
+      </fieldset>
+    </section>
+  </div>
