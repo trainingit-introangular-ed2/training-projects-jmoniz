@@ -3,13 +3,13 @@
     <label for="name">Project name:</label>
     <input type="text"
            name="name"
-           [(ngModel)]="project.name"
+           [(ngModel)]="projectName"
            placeholder="Enter project name">
   </fieldset>
   <input value="Save"
          type="submit"
-         (click)="saveProject()"
+         (click)="saveProject.emit(projectName)"
          class="primary" />
-  <button routerLink="/projects"
-          class="secondary">Cancel</button>
+  <button class="secondary"
+          (click)="cancelSave.emit()">Cancel</button>
 </form>

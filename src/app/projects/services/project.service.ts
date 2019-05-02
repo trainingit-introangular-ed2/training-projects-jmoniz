@@ -24,4 +24,9 @@ export class ProjectService {
   public getProject(id: number): Observable<Project> {
     return of(PROJECTS.find(project => project.id === id));
   }
+
+  public addProject(project: Project): void {
+    project.id = PROJECTS.length;
+    PROJECTS.push({ ...project });
+  }
 }
