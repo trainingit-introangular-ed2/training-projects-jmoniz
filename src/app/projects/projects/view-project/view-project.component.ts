@@ -1,6 +1,7 @@
 import { Location } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { Observable } from 'rxjs';
 import { Project } from '../../models/project.model';
 import { ProjectService } from '../../services/project.service';
 
@@ -10,15 +11,15 @@ import { ProjectService } from '../../services/project.service';
   styleUrls: ['./view-project.component.css']
 })
 export class ViewProjectComponent implements OnInit {
-  projectId: number;
-  project: Project;
+  projectId: string;
+  project$: Observable<Project>;
 
   constructor(activateRoute: ActivatedRoute, private projectService: ProjectService, private location: Location) {
-    this.projectId = parseInt(activateRoute.snapshot.params['id'], 10);
+    this.projectId = activateRoute.snapshot.params['id'];
   }
 
   ngOnInit() {
-    this.projectService.getProject(this.projectId).subscribe(project => (this.project = project));
+    this.project$ = this.projectService.getProject(this.projectId);
   }
 
   public goBack(): void {

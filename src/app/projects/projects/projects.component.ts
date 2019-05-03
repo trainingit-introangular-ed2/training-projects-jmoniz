@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Observable } from 'rxjs';
 import { Project } from '../models/project.model';
 import { ProjectService } from '../services/project.service';
 
@@ -8,7 +9,7 @@ import { ProjectService } from '../services/project.service';
   styleUrls: ['./projects.component.css']
 })
 export class ProjectsComponent implements OnInit {
-  public projects: Project[];
+  public projects: Observable<Project[]>;
 
   constructor(private projectService: ProjectService) {}
 
@@ -18,13 +19,13 @@ export class ProjectsComponent implements OnInit {
 
   public OnFilterProjects(searchText: string) {
     if (searchText.trim().length > 0) {
-      this.projectService.filter(searchText).subscribe(r => (this.projects = r));
+      this.projects = this.projectService.filter(searchText);
     } else {
       this.getProjects();
     }
   }
 
   private getProjects() {
-    this.projectService.getProjects().subscribe(r => (this.projects = r));
+    this.projects = this.projectService.getProjects();
   }
 }

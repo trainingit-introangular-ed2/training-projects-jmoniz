@@ -15,8 +15,9 @@ export class NewProjectComponent implements OnInit {
 
   ngOnInit() {
     this.project = {
-      id: 0,
-      name: ''
+      _id: '',
+      name: '',
+      owner: ''
     };
   }
 

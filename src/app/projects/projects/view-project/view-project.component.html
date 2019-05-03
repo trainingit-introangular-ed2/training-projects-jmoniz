@@ -1,4 +1,4 @@
-<app-viewer-project-form [project]='project'></app-viewer-project-form>
+<app-viewer-project-form [project]='project$ | async'></app-viewer-project-form>
 <div>
   <button (click)='goBack()'
           class="primary">Back to list</button>

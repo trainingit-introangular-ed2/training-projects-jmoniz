@@ -7,11 +7,15 @@ import { ProjectService } from '../../projects/services/project.service';
   styleUrls: ['./home.component.css']
 })
 export class HomeComponent implements OnInit {
-  public numProjects: number;
+  public numProjects = 0;
 
   constructor(private projectService: ProjectService) {}
 
   ngOnInit() {
-    this.projectService.countAll().subscribe(cnt => (this.numProjects = cnt));
+    this.getProjectsInfo();
+  }
+
+  private getProjectsInfo() {
+    this.projectService.countProjects().subscribe(res => (this.numProjects = res.count));
   }
 }

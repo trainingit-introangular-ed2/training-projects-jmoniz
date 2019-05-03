@@ -1,32 +1,38 @@
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable, of } from 'rxjs';
-import { PROJECTS } from '../models/mock-projects';
+import { Observable } from 'rxjs';
+import { map, tap } from 'rxjs/operators';
 import { Project } from '../models/project.model';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ProjectService {
-  constructor() {}
+  private apiUrl = 'https://api-base.herokuapp.com/api/pub/projects';
 
-  public getProjects(): Observable<Project[]> {
-    return of(PROJECTS);
+  constructor(private httpClient: HttpClient) {}
+
+  public countProjects(): Observable<any> {
+    const url = `${this.apiUrl}/count`;
+    return this.httpClient.get(url);
   }
 
-  public countAll(): Observable<number> {
-    return of(PROJECTS.length);
+  public getProjects(): Observable<Project[]> {
+    return this.httpClient.get<Project[]>(this.apiUrl).pipe(tap(p => console.log(p)));
   }
 
   public filter(searchText: string): Observable<Project[]> {
-    return of(PROJECTS.filter(project => project.name.toLocaleUpperCase().includes(searchText.toLocaleUpperCase())));
+    return this.httpClient
+      .get<Project[]>(this.apiUrl)
+      .pipe(map((projects: any) => projects.filter(project => project.name.toLowerCase().includes(searchText.toLowerCase()))));
   }
 
-  public getProject(id: number): Observable<Project> {
-    return of(PROJECTS.find(project => project.id === id));
+  public getProject(id: string): Observable<Project> {
+    const url = `${this.apiUrl}/${id}`;
+    return this.httpClient.get<Project>(url);
   }
 
   public addProject(project: Project): void {
-    project.id = PROJECTS.length;
-    PROJECTS.push({ ...project });
+    this.httpClient.post(this.apiUrl, project).subscribe();
   }
 }
