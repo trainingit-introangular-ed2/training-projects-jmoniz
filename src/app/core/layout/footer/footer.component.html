@@ -1,3 +1,10 @@
 <footer class="sticky">
-  <p class="">&copy; {{ currentDate | date: 'yyyy' }}</p>
+  <div class="container">
+    <div class="row">
+      <div class="col-sm-2">&copy; {{ currentDate | date: 'yyyy' }}</div>
+      <div class="col-sm-10"><span class="toast">{{ lastMessage$ | async }}</span></div>
+    </div>
+  </div>
+
+
 </footer>

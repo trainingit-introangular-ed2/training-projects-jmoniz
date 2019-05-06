@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { map, tap } from 'rxjs/operators';
+import { map } from 'rxjs/operators';
 import { Project } from '../models/project.model';
 
 @Injectable({
@@ -18,7 +18,7 @@ export class ProjectService {
   }
 
   public getProjects(): Observable<Project[]> {
-    return this.httpClient.get<Project[]>(this.apiUrl).pipe(tap(p => console.log(p)));
+    return this.httpClient.get<Project[]>(this.apiUrl);
   }
 
   public filter(searchText: string): Observable<Project[]> {
