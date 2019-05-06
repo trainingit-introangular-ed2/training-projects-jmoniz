@@ -30,4 +30,8 @@ export class NewProjectFormComponent implements OnInit {
       projectName: ['', [Validators.required]]
     });
   }
+
+  get name() {
+    return this.fg.get['projectName'];
+  }
 }
