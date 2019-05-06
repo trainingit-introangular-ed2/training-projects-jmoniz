@@ -1,14 +1,15 @@
-<form>
+<form [formGroup]="fg">
   <fieldset>
     <label for="name">Project name:</label>
     <input type="text"
            name="name"
-           [(ngModel)]="projectName"
+           formControlName="projectName"
            placeholder="Enter project name">
   </fieldset>
   <input value="Save"
          type="submit"
-         (click)="saveProject.emit(projectName)"
+         [disabled]="fg.invalid"
+         (click)="onSaveProject()"
          class="primary" />
   <button class="secondary"
           (click)="cancelSave.emit()">Cancel</button>

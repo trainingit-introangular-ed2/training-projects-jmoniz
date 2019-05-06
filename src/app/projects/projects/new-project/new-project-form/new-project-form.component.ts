@@ -1,4 +1,5 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-new-project-form',
@@ -6,13 +7,27 @@ import { Component, EventEmitter, OnInit, Output } from '@angular/core';
   styleUrls: ['./new-project-form.component.css']
 })
 export class NewProjectFormComponent implements OnInit {
-  public projectName: string;
+  public fg: FormGroup;
+
   @Output() public saveProject = new EventEmitter<string>();
   @Output() public cancelSave = new EventEmitter();
 
-  constructor() {}
+  constructor(private formBuilder: FormBuilder) {}
 
   ngOnInit() {
-    this.projectName = '';
+    this.buildForm();
+  }
+
+  public onSaveProject() {
+    if (this.fg.valid) {
+      const model = this.fg.value;
+      this.saveProject.emit(model.projectName);
+    }
+  }
+
+  private buildForm() {
+    this.fg = this.formBuilder.group({
+      projectName: ['', [Validators.required]]
+    });
   }
 }
